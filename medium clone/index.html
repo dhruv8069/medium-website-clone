@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medium Clone</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
+
+body{
+background:#fff;
+color:#242424;
+}
+
+/* NAVBAR */
+
+.navbar{
+height:70px;
+border-bottom:1px solid #e6e6e6;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 30px;
+position:sticky;
+top:0;
+background:white;
+z-index:100;
+}
+
+.nav-left{
+display:flex;
+align-items:center;
+gap:20px;
+}
+
+.logo{
+font-size:34px;
+font-weight:900;
+}
+
+.search{
+background:#f2f2f2;
+padding:10px 15px;
+border-radius:25px;
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.search input{
+border:none;
+background:none;
+outline:none;
+width:220px;
+}
+
+.nav-right{
+display:flex;
+align-items:center;
+gap:20px;
+}
+
+.get-app{
+padding:8px 16px;
+border-radius:25px;
+border:1px solid #ddd;
+background:white;
+cursor:pointer;
+}
+
+.avatar{
+width:35px;
+height:35px;
+border-radius:50%;
+object-fit:cover;
+}
+
+/* MAIN */
+
+.container{
+display:grid;
+grid-template-columns:240px 1fr 360px;
+min-height:calc(100vh - 70px);
+}
+
+/* LEFT */
+
+.sidebar{
+border-right:1px solid #eee;
+padding:30px 20px;
+}
+
+.sidebar ul{
+list-style:none;
+}
+
+.sidebar li{
+padding:14px 0;
+font-size:17px;
+display:flex;
+align-items:center;
+gap:12px;
+cursor:pointer;
+}
+
+.follow-box{
+margin-top:40px;
+padding-top:20px;
+border-top:1px solid #eee;
+}
+
+.follow-box h3{
+margin-bottom:10px;
+}
+
+.follow-box p{
+font-size:14px;
+color:#666;
+line-height:1.5;
+}
+
+.follow-box a{
+display:inline-block;
+margin-top:12px;
+text-decoration:none;
+color:green;
+}
+
+/* CENTER */
+
+.feed{
+padding:30px;
+}
+
+.banner{
+background:#f9f9f9;
+padding:14px 18px;
+border-radius:10px;
+margin-bottom:25px;
+font-size:14px;
+}
+
+.offer{
+background:#000;
+color:#fff;
+padding:5px 10px;
+border-radius:15px;
+margin-right:10px;
+font-size:12px;
+}
+
+.tabs{
+display:flex;
+gap:30px;
+padding-bottom:15px;
+border-bottom:1px solid #eee;
+margin-bottom:25px;
+}
+
+.tabs span{
+cursor:pointer;
+}
+
+.active{
+font-weight:700;
+border-bottom:2px solid black;
+padding-bottom:15px;
+}
+
+.article{
+display:flex;
+justify-content:space-between;
+gap:25px;
+padding:25px 0;
+border-bottom:1px solid #eee;
+}
+
+.article-content{
+flex:1;
+}
+
+.author{
+font-size:13px;
+color:#666;
+margin-bottom:10px;
+}
+
+.article h2{
+font-size:28px;
+line-height:1.3;
+margin-bottom:10px;
+}
+
+.article p{
+color:#666;
+line-height:1.6;
+margin-bottom:15px;
+}
+
+.stats{
+font-size:14px;
+color:#888;
+}
+
+.article img{
+width:250px;
+height:160px;
+object-fit:cover;
+border-radius:8px;
+}
+
+/* RIGHT */
+
+.rightbar{
+padding:30px;
+border-left:1px solid #eee;
+}
+
+.rightbar h2{
+font-size:18px;
+margin-bottom:20px;
+}
+
+.staff{
+display:flex;
+gap:12px;
+margin-bottom:22px;
+}
+
+.staff img{
+width:38px;
+height:38px;
+border-radius:50%;
+object-fit:cover;
+}
+
+.staff h4{
+font-size:14px;
+margin-bottom:5px;
+}
+
+.staff p{
+font-size:13px;
+line-height:1.4;
+color:#444;
+}
+
+.full-list{
+color:green;
+cursor:pointer;
+display:block;
+margin-bottom:30px;
+}
+
+.topic-title{
+margin-top:20px;
+}
+
+.topics{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:15px;
+}
+
+.topics span{
+background:#f2f2f2;
+padding:10px 15px;
+border-radius:25px;
+font-size:14px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1100px){
+
+.container{
+grid-template-columns:1fr;
+}
+
+.sidebar,
+.rightbar{
+display:none;
+}
+
+.article{
+flex-direction:column;
+}
+
+.article img{
+width:100%;
+height:250px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<div class="nav-left">
+<div class="logo">Medium</div>
+
+<div class="search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input type="text" placeholder="Search">
+</div>
+</div>
+<div class="nav-right">
+<button class="get-app">Get App</button>
+<i class="fa-regular fa-pen-to-square"></i>
+<i class="fa-regular fa-bell"></i>
+
+<img src="images/profile.png" class="avatar">
+</div>
+
+</nav>
+
+<div class="container">
+
+<!-- LEFT -->
+
+<aside class="sidebar">
+
+<ul>
+<li><i class="fa-solid fa-house"></i> Home</li>
+<li><i class="fa-regular fa-bookmark"></i> Library</li>
+<li><i class="fa-regular fa-user"></i> Profile</li>
+<li><i class="fa-regular fa-file-lines"></i> Stories</li>
+<li><i class="fa-solid fa-chart-column"></i> Stats</li>
+</ul>
+
+<div class="follow-box">
+<h3>Following</h3>
+<p>Discover writers and publications to follow.</p>
+<a href="#">See suggestions</a>
+</div>
+
+</aside>
+
+<!-- CENTER -->
+
+<main class="feed">
+
+<div class="banner">
+<span class="offer">Welcome Offer</span>
+Access to everything on Medium. Upgrade now.
+</div>
+
+<div class="tabs">
+<span class="active">For you</span>
+<span>Featured</span>
+</div>
+
+<div class="article">
+
+<div class="article-content">
+
+<div class="author">
+Data Science Collective · Feb 23
+</div>
+
+<h2>
+Should You Still Learn to Code in 2026?
+</h2>
+
+<p>
+The answer isn't as obvious as I used to believe. Technology is changing rapidly and developers need new skills.
+</p>
+
+<div class="stats">
+★ 4.4K &nbsp; 💬 233 &nbsp; 🔖 158
+</div>
+
+</div>
+
+<img src="images/article1.jpg">
+
+</div>
+
+<div class="article">
+
+<div class="article-content">
+
+<div class="author">
+Michal Malewicz · May 27
+</div>
+
+<h2>
+UI Design Direction 2026–2027
+</h2>
+
+<p>
+UI is already exploring exciting new directions and creating better experiences for users.
+</p>
+
+<div class="stats">
+★ 1.1K &nbsp; 💬 29 &nbsp; 🔖 30
+</div>
+
+</div>
+
+<img src="images/article2.png">
+
+</div>
+
+</main>
+
+<!-- RIGHT -->
+
+<aside class="rightbar">
+
+<h2>Staff Picks</h2>
+
+<div class="staff">
+<img src="images/profile.png">
+<div>
+<h4>Nikolaus Correll</h4>
+<p>Why reading The Decameron is as useful as ever.</p>
+</div>
+</div>
+
+<div class="staff">
+<img src="images/profile.png">
+<div>
+<h4>Tieshka K Smith</h4>
+<p>The Political Power of Black Cultural Gatherings.</p>
+</div>
+</div>
+
+<div class="staff">
+<img src="images/profile.png">
+<div>
+<h4>Markham Heid</h4>
+<p>The AirPods Effect.</p>
+</div>
+</div>
+
+<span class="full-list">See the full list</span>
+
+<h2 class="topic-title">Recommended Topics</h2>
+
+<div class="topics">
+<span>Programming</span>
+<span>Technology</span>
+<span>Design</span>
+<span>UI UX</span>
+<span>Coding</span>
+<span>Data Science</span>
+</div>
+
+</aside>
+
+</div>
+
+</body>
+</html>
